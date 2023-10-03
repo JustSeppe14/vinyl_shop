@@ -21,7 +21,12 @@ Route::view("/",'home');
 Route::view("contact",'contact');
 
 route::get('admin/records',function (){
-    return view('admin.records.index');
+    $records = [
+        'Queen - Greatest Hits',
+        'The Rolling Stones - Sticky Fingers',
+        'The Beatles - Abbey Road'
+    ];
+    return view('admin.records.index',['records' => $records]);
 });
 
 Route::middleware([
