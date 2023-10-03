@@ -20,13 +20,16 @@ Route::get('/', function () {
 Route::view("/",'home');
 Route::view("contact",'contact');
 
-route::get('admin/records',function (){
-    $records = [
-        'Queen - Greatest Hits',
-        'The Rolling Stones - Sticky Fingers',
-        'The Beatles - Abbey Road'
-    ];
-    return view('admin.records.index',['records' => $records]);
+Route::prefix('admin')->name('admin.')->group(function (){
+    Route::redirect('/','/admin/records');
+    Route::get('admin/records',function (){
+        $records = [
+            'Queen - <b>Greatest Hits</b>',
+            'The Rolling Stones - <i>Sticky Fingers</i>',
+            'The Beatles - Abbey Road'
+        ];
+        return view('admin.records.index',['records' => $records]);
+    });
 });
 
 Route::middleware([
