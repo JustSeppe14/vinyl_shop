@@ -22,7 +22,7 @@ Route::view("contact",'contact');
 
 route::get('admin/records',function (){
     return view('admin.records.index');
-})
+});
 
 Route::middleware([
     'auth:sanctum',
