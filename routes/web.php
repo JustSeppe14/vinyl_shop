@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::view("/",'home');
-Route::view("contact",'contact');
+Route::view("contact",'contact')->name('contact');
 
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','/admin/records');
@@ -29,7 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
             'The Beatles - Abbey Road'
         ];
         return view('admin.records.index',['records' => $records]);
-    });
+    })->name('records');
 });
 
 Route::middleware([
