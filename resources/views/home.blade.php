@@ -3,6 +3,7 @@
     <x-slot name="title">Welcome to the Vinyl Shop</x-slot>
 
     <p>Welcome to the website of The Vinyl Shop, a large online store with lots of (classic) vinyl records.</p>
+
 {{--    //link with URL--}}
 {{--    <a href="/contact">Contact</a>--}}
 
