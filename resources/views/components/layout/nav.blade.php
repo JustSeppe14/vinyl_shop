@@ -2,4 +2,5 @@
     <a href="{{ route('home') }}" class="underline">Home</a>
     <a href="{{ route('contact') }}" class="underline">Contact</a>
     <a href="{{ route('admin.records') }}" class="underline">Records</a>
+    <a href="{{route('playground')}}" class="underline">Playground</a>
 </nav>
