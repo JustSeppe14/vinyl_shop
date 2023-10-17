@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Genre;
+use App\Models\Record;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -15,7 +16,8 @@ class Demo extends Component
     ])]
     public function render()
     {
-        $genres = Genre::get();
-        return view('livewire.demo');
+        $records = Record::orderBy('artist')->orderBy('title')->get();
+        $genres = Genre::orderBy('name')->with('records')->has('records')->get();
+        return view('livewire.demo', compact('genres','records'));
     }
 }
