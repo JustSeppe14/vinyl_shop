@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('total_price', 6, 2);
             $table->unsignedInteger('quantity');
             $table->timestamps();
-            $table->timestamps();
         });
     }
 
