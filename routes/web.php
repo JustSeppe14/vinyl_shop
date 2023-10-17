@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::view("/",'home')->name('home');
 Route::view("contact",'contact')->name('contact');
 Route::view('playground','playground')->name('playground');
+Route::view('under-construction','under-construction')->name('under-construction');
 
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','/admin/records');
