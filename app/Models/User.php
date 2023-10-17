@@ -31,6 +31,11 @@ class User extends Authenticatable
         'admin',
     ];
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class); // an user has many orders
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -10,4 +10,9 @@ class Record extends Model
     use HasFactory;
 
     protected $guarded = ['id','created_at','updated_at'];
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class)->withDefault(); //a record belongs to a "genre"
+    }
 }
