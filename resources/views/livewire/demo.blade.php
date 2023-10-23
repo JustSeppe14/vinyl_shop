@@ -1,9 +1,10 @@
 <div>
 
     <h2>Records</h2>
+    <div class="my-4">{{ $records->links() }}</div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
         @foreach ($records as $record)
-            <div class="flex space-x-4 bg-white shadow-md rounded-lg p-4 ">
+            <div class="flex space-x-4 bg-white shadow-md rounded-lg p-4 @if($record->stock<=0) bg-red-300 @endif">
                 <div class="inline flex-none w-48">
                     <img src="{{ $record->cover }}" alt="">
                 </div>
@@ -21,6 +22,7 @@
             </div>
         @endforeach
     </div>
+    <div class="my-4">{{ $records->links() }}</div>
 
     <h2>Genres with records</h2>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">

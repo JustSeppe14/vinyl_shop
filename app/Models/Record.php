@@ -40,7 +40,16 @@ class Record extends Model
             },
         );
     }
+
     protected $appends = ['genre_name','price_euro','cover'];
+
+    public function scopeMaxPrice($query,$price = 100)
+    {
+        return $query->where('price','<=',$price);
+    }
+
+
+
     public function genre()
     {
         return $this->belongsTo(Genre::class,'genre_id','id')->withDefault(); //a record belongs to a "genre"
