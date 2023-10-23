@@ -6,7 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+
 
 class Record extends Model
 {
@@ -31,7 +32,7 @@ class Record extends Model
     protected function cover(): Attribute
     {
         return Attribute::make(
-            get: function ($value,$attributes){
+            get: function ($value, $attributes) {
                 $coverPath = 'covers/' . $attributes['mb_id'] . '.jpg';
                 return (Storage::disk('public')->exists($coverPath))
                     ? Storage::url($coverPath)
