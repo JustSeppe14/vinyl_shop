@@ -26,6 +26,7 @@ Route::view('under-construction','under-construction')->name('under-construction
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','/admin/records');
     Route::get('records',Demo::class)->name('records');
+    Route::get('genre',Demo::class)->name('genre');
 });
 
 Route::middleware([
