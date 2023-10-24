@@ -10,6 +10,8 @@ use Livewire\WithPagination;
 
 class Demo extends Component
 {
+    public $zoek = 'the';
+    public $perPage = 4;
     use WithPagination;
     #[Layout('layouts.vinylshop',[
         'title'=> 'Eloquent models',
@@ -19,17 +21,18 @@ class Demo extends Component
     public function render()
     {
         $maxPrice = 20;
-        $perPage = 8;
+        $q = '%' . $this->zoek . '%';
         $records = Record::orderBy('artist')
             ->orderBy('title')
+            ->where('title','like',$q)
             // ->maxPrice($maxPrice)
-            ->paginate($perPage);
+            ->paginate($this->perPage);
 
         $genres = Genre::orderBy('name')
             ->with('records')
             ->has('records')
             ->get();
-
+//        $genres = Genre::get();
         return view('livewire.demo',compact('records','genres'));
     }
 }

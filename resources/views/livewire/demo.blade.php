@@ -1,6 +1,23 @@
 <div>
-
+{{--  <pre>@json($genres, JSON_PRETTY_PRINT)</pre>--}}
     <h2>Records</h2>
+    {{-- preloader --}}
+
+    <x-tmk.preloader>
+        <p>Even geduld aub</p>
+    </x-tmk.preloader>
+
+    {{-- filter --}}
+    <div class="bg-sky-200 p-2">
+        <x-input wire:model.live.debounce.500ms="zoek" placeholder="filter record" />
+        <x-tmk.form.select wire:model.live="perPage">
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+        </x-tmk.form.select>
+    </div>
+
+
     <div class="my-4">{{ $records->links() }}</div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
         @foreach ($records as $record)
