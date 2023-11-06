@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Demo;
+use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::view("/",'home')->name('home');
+Route::get('shop',Shop::class)->name('shop');
 Route::view("contact",'contact')->name('contact');
 Route::view('playground','playground')->name('playground');
 Route::view('under-construction','under-construction')->name('under-construction');
+
 
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','/admin/records');
