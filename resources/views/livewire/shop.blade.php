@@ -1,4 +1,50 @@
 <div>
+    <div class="grid grid-cols-10 gap-4">
+        <div class="col-span-10 md:col-span-5 lg:col-span-3">
+            <x-label for="name" value="Filter"/>
+            <div
+                class="relative">
+                <x-input id="name" type="text"
+                         wire:model.live.debounce.500ms="name"
+                         class="block mt-1 w-full"
+                         placeholder="Filter Artist Or Record"/>
+                <button
+                    @click="$wire.set('name', '')"
+                    class="w-5 absolute right-4 top-3">
+                    <x-phosphor-x/>
+                </button>
+            </div>
+        </div>
+        <div class="col-span-5 md:col-span-2 lg:col-span-2">
+            <x-label for="genre" value="Genre"/>
+            <x-tmk.form.select id="genre"
+                               wire:model.live="genre"
+                               class="block mt-1 w-full">
+                <option value="%">All Genres</option>
+            </x-tmk.form.select>
+        </div>
+        <div class="col-span-5 md:col-span-3 lg:col-span-2">
+            <x-label for="perPage" value="Records per page"/>
+            <x-tmk.form.select id="perPage"
+                               wire:model.live="perPage"
+                               class="block mt-1 w-full">
+                @foreach ([3,6,9,12,15,18,24] as $value)
+                    <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
+            </x-tmk.form.select>
+        </div>
+        <div class="col-span-10 lg:col-span-3">
+            <x-label for="price">Price &le;
+                <output id="pricefilter" name="pricefilter">{{$price}}</output>
+            </x-label>
+            <x-input type="range" id="price" name="price"
+                     wire:model.live="price"
+                     min="{{$priceMin}}"
+                     max="{{$priceMax}}"
+                     oninput="pricefilter.value = price.value"
+                     class="block mt-4 w-full h-2 bg-indigo-100 accent-indigo-600 appearance-none"/>
+        </div>
+    </div>
     {{-- show preloader while fetching data in the background --}}
     <div class="fixed top-8 left-1/2 -translate-x-1/2 z-50 animate-pulse" wire:loading>
         <x-tmk.preloader class="bg-lime-700/60 text-white border border-lime-700 shadow-2xl">
@@ -44,6 +90,12 @@
         @endforeach
     </div>
     <div class="my-4">{{$records->links()}}</div>
+    {{-- No records found --}}
+    @if($records->isEmpty())
+        <x-tmk.alert type="danger" class="w-full">
+            Can't find any artist or album with <b>'{{ $name }}'</b> for this genre
+        </x-tmk.alert>
+    @endif
     {{-- Detail section --}}
     <x-dialog-modal wire:model="showModal">
         <x-slot name="title">
