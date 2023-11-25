@@ -21,6 +21,8 @@
         <h1 class="text-3xl mb-4">
             {{ $subtitle ?? $title ?? "This page has no (sub)title" }}
         </h1>
+
+
         {{-- Main content --}}
         {{ $slot }}
     </main>

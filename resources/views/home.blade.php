@@ -9,10 +9,10 @@
 
 {{--    //Link with route name--}}
 {{--    <a href="{{ route('contact') }}">Contact</a>--}}
-    <h3>Random quotes</h3>
-    <livewire::quote/>
-    <hr>
-    @livewire('quote')
+{{--    <h3>Random quotes</h3>--}}
+{{--    <livewire::quote/>--}}
+{{--    <hr>--}}
+{{--    @livewire('quote')--}}
 
     @push('script')
         <script>

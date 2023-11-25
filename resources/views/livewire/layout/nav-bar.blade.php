@@ -37,7 +37,7 @@
                 {{-- avatar --}}
                 <x-slot name="trigger">
                     <img class="rounded-full h-8 w-8 cursor-pointer"
-                         src="https://ui-avatars.com/api/?name={{urlencode(auth()->user()->name)}}"
+                         src="{{$avatar}}"
                          alt="{{auth()->user()->name}}">
                 </x-slot>
                 <x-slot name="content">
