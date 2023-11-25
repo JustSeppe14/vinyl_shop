@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Genre;
 use App\Models\Record;
 use Http;
 use Livewire\Attributes\Layout;
