@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Genres;
+use App\Livewire\Admin\Records;
 use App\Livewire\Demo;
 use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,7 @@ Route::get('mail',function (){
 
 Route::middleware(['auth','admin','active'])->prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','/admin/records');
-    Route::get('records',Demo::class)->name('records');
+    Route::get('records',Records::class)->name('records');
     Route::get('genre',Genres::class)->name('genre');
 });
 
