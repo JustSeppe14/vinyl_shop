@@ -1,4 +1,9 @@
 <div>
+    <div class="fixed top-8 left-1/2 -translate-x-1/2 z-50 animate-pulse" wire:loading>
+        <x-tmk.preloader class="bg-lime-700/60 text-white border border-lime-700 shadow-2xl">
+            {{$loading}}
+        </x-tmk.preloader>
+    </div>
     <x-tmk.section
 
         x-data="{open: false}"
@@ -57,66 +62,92 @@
                             {{$orderBy === 'id' ? 'inline-block' : 'hidden'}}
                         "/>
                 </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             @foreach($users as $user)
                 <tr
-                    wire:key="user-{{$user->id}}"
+                    wire:key="user-{{ $user->id }}"
                     class="border-t border-gray-300 [&>td]:p-2">
-                    @if($editUser['name'] !== $user->name)
+                    @if($editUser['id']!== $user->id)
                         <td
-                            wire:click="edit({{$user->id}})"
-                            class="text-left cursor-pointer">{{$user->name}}
+                            class="text-left cursor-pointer"
+                            wire:click="edit({{ $user->id }})">{{$user->name}}
                         </td>
                     @else
                         <td>
-                            <div class="flex flex-col text-left w-64">
-                                <x-input id="edit_{{ $user->name }}" type="text"
+                            <div class="flex flex-col text-left">
+                                <x-input id="edit_{{$user->id}}" type="text"
                                          x-init="$el.focus()"
-                                         @keydown.enter="$el.setAttribute('disabled', true);"
-                                         @keydown.tab="$el.setAttribute('disabled', true);"
-                                         @keydown.esc="$el.setAttribute('disabled', true);"
+                                         @keydown.enter="$el.setAttribute('disabled',true);"
+                                         @keydown.tab="$el.setAttribute('disabled',true);"
+                                         @keydown.esc="$el.setAttribute('disabled',true);"
                                          wire:model="editUser.name"
-                                         wire:keydown.enter="updateName({{$user->name}})"
-                                         wire:keydown.tab="updateName({{$user->name}})"
+                                         wire:keydown.enter="updateName({{$user->id}})"
+                                         wire:keydown.tab="updateName({{$user->id}})"
                                          wire:keydown.escape="resetValues()"
-                                         class="w-64"/>
-
+                                         class="w-48"
+                                />
+                                <x-phosphor-arrows-clockwise
+                                    wire:loading
+                                    wire:target="updateName{{$user->id}}"
+                                    class="w-5 h-5 text-gray-500 absolute animate-spin"/>
                                 <x-input-error for="editUser.name" class="mt-2"/>
                             </div>
                         </td>
                     @endif
-                    @if($editUser['email'] !== $user->email)
+                    @if($editUser['id']!== $user->id)
                         <td
-                            wire:click="edit({{$user->id}})"
-                            class="text-left cursor-pointer">{{$user->email}}
+                            class="text-left cursor-pointer"
+                            wire:click="edit({{ $user->id }})">{{$user->email}}
                         </td>
                     @else
                         <td>
-                            <div class="flex flex-col text-left w-64">
-                                <x-input id="edit_{{ $user->email }}" type="text"
+                            <div class="flex flex-col text-left">
+                                <x-input id="edit_{{$user->id}}" type="text"
                                          x-init="$el.focus()"
-                                         @keydown.enter="$el.setAttribute('disabled', true);"
-                                         @keydown.tab="$el.setAttribute('disabled', true);"
-                                         @keydown.esc="$el.setAttribute('disabled', true);"
+                                         @keydown.enter="$el.setAttribute('disabled',true);"
+                                         @keydown.tab="$el.setAttribute('disabled',true);"
+                                         @keydown.esc="$el.setAttribute('disabled',true);"
                                          wire:model="editUser.email"
-                                         wire:keydown.enter="updateMail({{$user->email}})"
-                                         wire:keydown.tab="updateMail({{$user->email}})"
+                                         wire:keydown.enter="updateMail({{$user->id}})"
+                                         wire:keydown.tab="updateMail({{$user->id}})"
                                          wire:keydown.escape="resetValues()"
-                                         class="w-64"/>
-
+                                         class="w-48"
+                                />
+                                <x-phosphor-arrows-clockwise
+                                    wire:loading
+                                    wire:target="updateMail{{$user->id}}"
+                                    class="w-5 h-5 text-gray-500 absolute animate-spin"/>
                                 <x-input-error for="editUser.email" class="mt-2"/>
                             </div>
                         </td>
                     @endif
-                    <td>{{$user->active}}</td>
-
                     <td>
+                        {{$user->active}}
+                    </td>
+                    <td>{{$user->admin}}</td>
+                    <td>
+                        <div class="flex gap-1 justify-center [&>*]:cursor-pointer [&>*]:outline-0 [&>*]:transition">
+                            @if($user->id === auth()->user()->admin)
+                            <x-phosphor-trash-duotone
+                                                                    wire:click="delete({{$user->id}})"
+                                                                    wire:confirm="Are you sure you want to delete this user?"
 
+                                class="w-5 text-gray-300 hover:text-red-600" hidden/>
+                            @else
+                            <x-phosphor-trash-duotone
+                                wire:click="delete({{$user->id}})"
+                                wire:confirm="Are you sure you want to delete this user?"
+
+                                class="w-5 text-gray-300 hover:text-red-600"/>
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
         <div class="my-4">{{$users->links()}}</div>
