@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\Genres;
 use App\Livewire\Admin\Records;
+use App\Livewire\Admin\UsersBasic;
 use App\Livewire\Demo;
 use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware(['auth','admin','active'])->prefix('admin')->name('admin.')->g
     Route::redirect('/','/admin/records');
     Route::get('records',Records::class)->name('records');
     Route::get('genre',Genres::class)->name('genre');
+    Route::get('users/basic', UsersBasic::class)->name('users.basic');
 });
 
 Route::middleware([

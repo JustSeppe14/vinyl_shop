@@ -104,13 +104,53 @@
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h2>title</h2>
+            <h2>New record</h2>
         </x-slot>
         <x-slot name="content">
-            content
+            <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-2">
+                    <x-label for="id" value="MusicBrainz id"/>
+                    <x-input type="text" id="id" name="Musicbrainzid"
+                             wire:model.live="form.mb_id"
+                             placeholder="MusicBrainz ID" />
+                    <x-button for="id" wire:click="getDataFromMusicbrainzApi()"
+                              class="w-1/4">Get record info</x-button>
+                    <x-input-error for="id" class="mt-2"/>
+                </div>
+                <div class="col-span-2">
+                    <x-label for="genre" value="Genre"/>
+                    <x-tmk.form.select id="Genre"
+                                       wire:model.live="genre"
+                                       class="block mt-1 w-2/3">
+                        <option value="%">Select a genre</option>
+                        @foreach($genres as $g)
+                            <option value="{{$g->id}}">
+                                {{$g->name}}
+                            </option>
+                        @endforeach
+                    </x-tmk.form.select>
+                    <x-input-error for="genre" class="mt-2"/>
+                </div>
+                <div class="col-span-2">
+                    <x-label for="price" value="Price"/>
+                    <x-input type="number" id="price"
+                             wire:model.live="form.price"/>
+                    <x-input-error for="price" class="mt-2"/>
+                </div>
+                <div class="col-span-2">
+                    <x-label for="stock" value="Stock"/>
+                    <x-input type="number" id="stock"
+                             wire:model.live="form.stock"/>
+                    <x-input-error for="stock" class="mt-2"/>
+                </div>
+            </div>
         </x-slot>
+
         <x-slot name="footer">
             <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
+            <x-button wire:model="form"
+                      wire:click="newRecord()"
+                      >Save you record</x-button>
         </x-slot>
     </x-dialog-modal>
 </div>

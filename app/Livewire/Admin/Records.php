@@ -18,7 +18,7 @@ class Records extends Component
     public $noCover = false;
     public $perPage = 5;
     // show/hide the modal
-    public $showModal = false;
+    public $showModal = true;
     public RecordForm $form;
 
     // reset the paginator
@@ -36,6 +36,8 @@ class Records extends Component
         $this->form->reset();
         $this->resetErrorBag();
         $this->showModal = true;
+
+
     }
 
     public function getDataFromMusicbrainzApi()
@@ -49,6 +51,7 @@ class Records extends Component
         $this->form->fill($record);
         $this-> showModal = true;
     }
+
 
     public function render()
     {

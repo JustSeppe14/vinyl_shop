@@ -23,6 +23,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function scopeSearchUser($query, $search = '%')
+    {
+        return $query->where('name', 'like', "%{$search}%")
+            ->orWhere('email', 'like', "%{$search}%");
+    }
     protected $fillable = [
         'name',
         'email',
