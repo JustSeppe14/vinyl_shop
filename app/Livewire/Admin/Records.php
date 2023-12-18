@@ -18,7 +18,7 @@ class Records extends Component
     public $noCover = false;
     public $perPage = 5;
     // show/hide the modal
-    public $showModal = true;
+    public $showModal = false;
     public RecordForm $form;
 
     // reset the paginator
@@ -42,14 +42,45 @@ class Records extends Component
 
     public function getDataFromMusicbrainzApi()
     {
+        $this->validateOnly('form.mb_id');
         $this->form->getArtistRecord();
     }
 
+    public function createRecord()
+    {
+        $this->form->create();
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The record <b><i>{$this->form->title}</i></b> has been added",
+            'icon' => 'success',
+        ]);
+    }
     public function editRecord(Record $record)
     {
         $this->resetErrorBag();
         $this->form->fill($record);
-        $this-> showModal = true;
+        $this->showModal = true;
+    }
+
+    public function updateRecord(Record $record)
+    {
+        $this->form->update($record);
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The record <b><i>{$this->form->title}</i></b> from <b><i>{$this->form->artist}</i></b> has been updated",
+            'icon' => 'success',
+        ]);
+    }
+    public function deleteRecord(Record $record)
+    {
+        $this->form->delete($record);
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The record <b><i>{$record->title}</i></b> from <b><i>{$record->artist}</i></b> has been deleted",
+            'icon' => 'success',
+        ]);
     }
 
 

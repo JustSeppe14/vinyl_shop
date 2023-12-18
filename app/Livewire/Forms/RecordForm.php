@@ -16,7 +16,6 @@ class RecordForm extends Form
     public $artist = null;
     #[Validate('required', as: 'title for this record')]
     public $title = null;
-    #[Validate('required|size:36|unique:records,mb_id,id', as: 'MusicBrainz ID')]
     public $mb_id = null;
     #[Validate('required|numeric|min:0', as: 'stock')]
     public $stock = null;
@@ -25,6 +24,17 @@ class RecordForm extends Form
     #[Validate('required|exists:genres,id', as: 'genre')]
     public $genre_id = null;
     public $cover = '/storage/covers/no-cover.png';
+
+    // special validation rule for mb_id (unique:records,mb_id,id) for insert and update!
+    public function rules()
+    {
+        return [
+            'mb_id' => "required|size:36|unique:records,mb_id,{$this->id}",
+        ];
+    }
+    protected $validationAttributes = [
+        'mb_id' => 'MusicBrainz ID',
+    ];
 
     // read the selected record
     public function read($record)
