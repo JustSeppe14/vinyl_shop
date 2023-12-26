@@ -155,8 +155,8 @@
                                 />
                                 <x-phosphor-arrows-clockwise
                                     wire:loading
-                                    wire:target="update"
-                                    class="w-5 h-5 text-gray-500 absolute top-3 right-2 animate-spin"/>
+                                    wire:target="update{{$genre->id}}"
+                                    class="w-5 h-5 text-gray-500 absolute animate-spin"/>
                                 <x-input-error for="editGenre.name" class="mt-2"/>
                             </div>
                         </td>

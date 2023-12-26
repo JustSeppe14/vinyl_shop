@@ -62,7 +62,9 @@
                         <x-dropdown-link href="{{ route('admin.genres2') }}">Genres 2</x-dropdown-link>
                         <x-dropdown-link href="{{ route('admin.records') }}">Records</x-dropdown-link>
                         <x-dropdown-link href="{{ route('under-construction') }}">Covers</x-dropdown-link>
-                        <x-dropdown-link href="{{ route('under-construction') }}">Users</x-dropdown-link>
+                        <div class="border-t border-gray-100"></div>
+                        <x-dropdown-link href="{{route('admin.users.basic')}}">Users (basic)</x-dropdown-link>
+                        <div class="border-t border-gray-100"></div>
                         <x-dropdown-link href="{{ route('under-construction') }}">Orders</x-dropdown-link>
                     @endif
                 </x-slot>
