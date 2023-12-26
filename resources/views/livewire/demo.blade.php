@@ -21,7 +21,7 @@
     <div class="my-4">{{ $records->links() }}</div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
         @foreach ($records as $record)
-            <div class="flex space-x-4 bg-white shadow-md rounded-lg p-4 @if($record->stock<=0) bg-red-300 @endif">
+            <div class="flex space-x-4 shadow-md rounded-lg p-4 @if($record->stock<=0) bg-red-300 @else bg-white @endif">
                 <div class="inline flex-none w-48">
                     <img src="{{ $record->cover }}" alt="">
                 </div>

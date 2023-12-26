@@ -12,6 +12,9 @@
         <x-nav-link href="{{route('shop')}}" :active="request()->routeIs('shop')">
             Shop
         </x-nav-link>
+        <x-nav-link href="{{route('shop2')}}" :active="request()->routeIs('shop2')">
+            Shop 2
+        </x-nav-link>
         <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">
             Contact
         </x-nav-link>
@@ -55,7 +58,8 @@
                     @if(auth()->user()->admin)
                         {{-- admins only --}}
                         <div class="block px-4 py-2 text-xs text-gray-400">Admin</div>
-                        <x-dropdown-link href="{{ route('admin.genre') }}">Genres</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('admin.genres') }}">Genres</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('admin.genres2') }}">Genres 2</x-dropdown-link>
                         <x-dropdown-link href="{{ route('admin.records') }}">Records</x-dropdown-link>
                         <x-dropdown-link href="{{ route('under-construction') }}">Covers</x-dropdown-link>
                         <x-dropdown-link href="{{ route('under-construction') }}">Users</x-dropdown-link>
