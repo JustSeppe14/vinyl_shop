@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('artist');
             $table->string('title');
             $table->string('mb_id',36)->unique();
-            $table->string('price',5,2)->default(19.99);
+            $table->float('price',5,2)->default(19.99);
             $table->unsignedInteger('stock')->default(1);
             $table->timestamps();
         });
